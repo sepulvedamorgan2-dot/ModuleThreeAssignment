@@ -6,7 +6,7 @@ var logger = LogManager.Setup().LoadConfigurationFromFile(path).GetCurrentClassL
 
 logger.Info("Program started");
 
-string file = "dk.csv";
+string file = "mario.csv";
 // make sure movie file exists
 if (!File.Exists(file))
 {
@@ -19,6 +19,9 @@ else
     List<UInt64> Ids = [];
     List<string> Names = [];
     List<string?> Descriptions = [];
+    List<string?> Species = [];
+    List<string?> FirstAppearance = [];
+    List<string?> YearCreated = [];
     // to populate the lists with data, read from the data file
     try
     {
@@ -38,6 +41,12 @@ else
                 Names.Add(characterDetails[1]);
                 // 3rd array element contains character description
                 Descriptions.Add(characterDetails[2]);
+                // 4th 
+                Species.Add(characterDetails[3]);
+                //5th
+                FirstAppearance.Add(characterDetails[4]);
+                //6th
+                YearCreated.Add(characterDetails[5]);
             }
         }
         sr.Close();
@@ -103,6 +112,9 @@ else
                 Console.WriteLine($"Id: {Ids[i]}");
                 Console.WriteLine($"Name: {Names[i]}");
                 Console.WriteLine($"Description: {Descriptions[i]}");
+                Console.WriteLine($"Species: {Species[i]}");
+                Console.WriteLine($"First Appearance: {FirstAppearance[i]}");
+                Console.WriteLine($"Year Created: {YearCreated[i]}");
                 Console.WriteLine();
             }
         }
