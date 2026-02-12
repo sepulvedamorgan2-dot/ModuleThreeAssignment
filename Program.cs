@@ -86,15 +86,27 @@ else
                     // input character description
                     Console.WriteLine("Enter description:");
                     string? Description = Console.ReadLine();
-                    // Console.WriteLine($"{Id}, {Name}, {Description}");
+                    //Species
+                    Console.WriteLine("Enter species: ");
+                    string? Speciesadd = Console.ReadLine();
+                    //FirstApp
+                    Console.WriteLine("Enter Year of first appearance: ");
+                    string? FirstAppearanceadd = Console.ReadLine();
+                    //Year Created
+                    Console.WriteLine("Year Created: ");
+                    string? YearCreatedAdd = Console.ReadLine();
                     // create file from data
                     StreamWriter sw = new(file, true);
-                    sw.WriteLine($"{Id},{Name},{Description}");
+                    sw.WriteLine($"{Id},{Name},{Description}, {Speciesadd}, {FirstAppearanceadd}, {YearCreatedAdd}");
                     sw.Close();
                     // add new character details to Lists
                     Ids.Add(Id);
                     Names.Add(Name);
                     Descriptions.Add(Description);
+                    Species.Add(Speciesadd);
+                    FirstAppearance.Add(FirstAppearanceadd);
+                    YearCreated.Add(YearCreatedAdd);
+
                     // log transaction
                     logger.Info($"Character id {Id} added");
                 }
