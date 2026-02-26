@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿﻿using NLog;
 string path = Directory.GetCurrentDirectory() + "//nlog.config";
 
 // create instance of Logger
@@ -94,17 +94,11 @@ else
         else if (choice == "2")
         {
             // Display All Characters
-            // loop thru Lists
-            /*
-            for (int i = 0; i < Ids.Count; i++)
+            // loop thru List
+            foreach(Character character in characters)
             {
-                // display character details
-                Console.WriteLine($"Id: {Ids[i]}");
-                Console.WriteLine($"Name: {Names[i]}");
-                Console.WriteLine($"Description: {Descriptions[i]}");
-                Console.WriteLine();
+                Console.WriteLine(character.Display());
             }
-            */
         }
     } while (choice == "1" || choice == "2");
 }
