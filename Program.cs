@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿﻿using NLog;
 string path = Directory.GetCurrentDirectory() + "//nlog.config";
 
 // create instance of Logger
@@ -6,7 +6,7 @@ var logger = LogManager.Setup().LoadConfigurationFromFile(path).GetCurrentClassL
 
 logger.Info("Program started");
 
-string file = "mario.csv";
+string file = "dk.csv";
 // make sure movie file exists
 if (!File.Exists(file))
 {
@@ -14,15 +14,10 @@ if (!File.Exists(file))
 }
 else
 {
-    // create parallel lists of character details
+    // create list of characters
     // lists are used since we do not know number of lines of data
-    List<UInt64> Ids = [];
-    List<string> Names = [];
-    List<string?> Descriptions = [];
-    List<string?> Species = [];
-    List<string?> FirstAppearance = [];
-    List<string?> YearCreated = [];
-    // to populate the lists with data, read from the data file
+    // to populate the list with data, read from the data file
+    List<Character> characters = [];
     try
     {
         StreamReader sr = new(file);
@@ -33,20 +28,16 @@ else
             string? line = sr.ReadLine();
             if (line is not null)
             {
+                Character character = new();
                 // character details are separated with comma(,)
                 string[] characterDetails = line.Split(',');
                 // 1st array element contains id
-                Ids.Add(UInt64.Parse(characterDetails[0]));
+                character.Id = UInt64.Parse(characterDetails[0]);
                 // 2nd array element contains character name
-                Names.Add(characterDetails[1]);
+                character.Name = characterDetails[1] ?? string.Empty;
                 // 3rd array element contains character description
-                Descriptions.Add(characterDetails[2]);
-                // 4th 
-                Species.Add(characterDetails[3]);
-                //5th
-                FirstAppearance.Add(characterDetails[4]);
-                //6th
-                YearCreated.Add(characterDetails[5]);
+                character.Description = characterDetails[2] ?? string.Empty;
+                characters.Add(character);
             }
         }
         sr.Close();
@@ -55,6 +46,7 @@ else
     {
         logger.Error(ex.Message);
     }
+/*
     string? choice;
     do
     {
@@ -86,27 +78,15 @@ else
                     // input character description
                     Console.WriteLine("Enter description:");
                     string? Description = Console.ReadLine();
-                    //Species
-                    Console.WriteLine("Enter species: ");
-                    string? Speciesadd = Console.ReadLine();
-                    //FirstApp
-                    Console.WriteLine("Enter Year of first appearance: ");
-                    string? FirstAppearanceadd = Console.ReadLine();
-                    //Year Created
-                    Console.WriteLine("Year Created: ");
-                    string? YearCreatedAdd = Console.ReadLine();
+                    // Console.WriteLine($"{Id}, {Name}, {Description}");
                     // create file from data
                     StreamWriter sw = new(file, true);
-                    sw.WriteLine($"{Id},{Name},{Description}, {Speciesadd}, {FirstAppearanceadd}, {YearCreatedAdd}");
+                    sw.WriteLine($"{Id},{Name},{Description}");
                     sw.Close();
                     // add new character details to Lists
                     Ids.Add(Id);
                     Names.Add(Name);
                     Descriptions.Add(Description);
-                    Species.Add(Speciesadd);
-                    FirstAppearance.Add(FirstAppearanceadd);
-                    YearCreated.Add(YearCreatedAdd);
-
                     // log transaction
                     logger.Info($"Character id {Id} added");
                 }
@@ -124,13 +104,11 @@ else
                 Console.WriteLine($"Id: {Ids[i]}");
                 Console.WriteLine($"Name: {Names[i]}");
                 Console.WriteLine($"Description: {Descriptions[i]}");
-                Console.WriteLine($"Species: {Species[i]}");
-                Console.WriteLine($"First Appearance: {FirstAppearance[i]}");
-                Console.WriteLine($"Year Created: {YearCreated[i]}");
                 Console.WriteLine();
             }
         }
     } while (choice == "1" || choice == "2");
+*/
 }
 
 logger.Info("Program ended");
